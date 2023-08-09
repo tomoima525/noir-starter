@@ -1,5 +1,6 @@
 import { utils } from 'ethers';
 import fs from 'fs';
+import path from 'path';
 import { buildPoseidon } from 'circomlibjs';
 import {
   BarretenbergApiAsync,
@@ -11,8 +12,10 @@ import { decompressSync } from 'fflate';
 import { executeCircuit, compressWitness } from '@noir-lang/acvm_js';
 import { encodeStringToBigInt } from './encodeStringToBigInt.js';
 import { createPoseidonHash } from './poseidon.js';
+import { generateMerkleProof } from './generateMerkleProof.js';
 
 const circuit = JSON.parse(fs.readFileSync('./circuits/target/main.json', 'utf8'));
+const filepath = path.join('./node-script', 'tree.json');
 
 async function generateWitness(
   input: Map<number, string>,
@@ -82,7 +85,18 @@ export default async function main() {
   const age: bigint = 20n;
   const country: bigint = encodeStringToBigInt('BR');
   const commits = [name, age, country].map(v => createPoseidonHash(poseidon, [v, nonce]));
-  const witnessInputs = [commits, [name, age, country], [nonce, nonce, nonce]]
+  const merkleProof = await generateMerkleProof(filepath, 'BR');
+
+  const witnessInputs = [
+    commits,
+    18n,
+    [name, age, country],
+    [nonce, nonce, nonce],
+    merkleProof?.leaf,
+    merkleProof?.root,
+    merkleProof?.pathIndices,
+    merkleProof?.siblings,
+  ]
     .flatMap(v => v)
     .reduce((acc: Map<number, string>, v, i) => {
       console.log(`witness input ${i}:`, v);
@@ -109,7 +123,7 @@ export default async function main() {
   const verified = await verifyProof(api, acirBuffer, proof);
   console.log('Verified:', verified);
 
-  const publicInputs = proof.slice(0, 32 * 3);
-  const slicedProof = proof.slice(32 * 3);
+  const publicInputs = proof.slice(0, 32 * 4);
+  const slicedProof = proof.slice(32 * 4);
   return { proof: slicedProof, publicInputs };
 }

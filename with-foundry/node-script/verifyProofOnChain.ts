@@ -36,6 +36,7 @@ export const verifyProofOnChain = async ({ verifierContract }: { verifierContrac
       publicInputs.slice(0, 32),
       publicInputs.slice(32, 64),
       publicInputs.slice(64, 96),
+      publicInputs.slice(96, 128),
     ]);
   console.log('result', result);
   return true;
