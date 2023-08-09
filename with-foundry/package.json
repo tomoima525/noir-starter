@@ -1,0 +1,27 @@
+{
+  "name": "with-foundry",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.0.5",
+    "prettier": "^3.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "@aztec/bb.js": "^0.3.4",
+    "@noir-lang/acvm_js": "github:noir-lang/acvm-simulator-wasm#c56eec56f67f90fef90126c5575b85190bdcd1e1",
+    "@noir-lang/noir_wasm": "github:noir-lang/noir_wasm",
+    "dotenv": "^16.0.1",
+    "ethers": "^5.6.9",
+    "fflate": "^0.8.0"
+  }
+}
