@@ -20,6 +20,7 @@
     "@aztec/bb.js": "^0.3.4",
     "@noir-lang/acvm_js": "github:noir-lang/acvm-simulator-wasm#c56eec56f67f90fef90126c5575b85190bdcd1e1",
     "@noir-lang/noir_wasm": "github:noir-lang/noir_wasm",
+    "circomlibjs": "^0.1.7",
     "dotenv": "^16.0.1",
     "ethers": "^5.6.9",
     "fflate": "^0.8.0"

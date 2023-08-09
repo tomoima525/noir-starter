@@ -1,5 +1,6 @@
 import { utils } from 'ethers';
 import fs from 'fs';
+import { buildPoseidon } from 'circomlibjs';
 import {
   BarretenbergApiAsync,
   Crs,
@@ -8,6 +9,8 @@ import {
 } from '@aztec/bb.js/dest/node/index.js';
 import { decompressSync } from 'fflate';
 import { executeCircuit, compressWitness } from '@noir-lang/acvm_js';
+import { encodeStringToBigInt } from './encodeStringToBigInt.js';
+import { createPoseidonHash } from './poseidon.js';
 
 const circuit = JSON.parse(fs.readFileSync('./circuits/target/main.json', 'utf8'));
 
@@ -73,11 +76,22 @@ export default async function main() {
   const acirBuffer = Buffer.from(circuit.bytecode, 'base64');
 
   console.log('Generating inputs...');
-
-  const witnessInputs = [3, 3]
+  const poseidon = await buildPoseidon();
+  const name: bigint = encodeStringToBigInt('Chris Nye');
+  const nonce: bigint = encodeStringToBigInt('5678');
+  const age: bigint = 20n;
+  const country: bigint = encodeStringToBigInt('BR');
+  const commits = [name, age, country].map(v => createPoseidonHash(poseidon, [v, nonce]));
+  const witnessInputs = [commits, [name, age, country], [nonce, nonce, nonce]]
     .flatMap(v => v)
     .reduce((acc: Map<number, string>, v, i) => {
       console.log(`witness input ${i}:`, v);
+      // poseidon hash is a string of bignumber
+      if (typeof v === 'string') {
+        const hex = BigInt(v).toString(16);
+        acc.set(i + 1, utils.hexZeroPad(`0x${hex}`, 32));
+        return acc;
+      }
       acc.set(i + 1, utils.hexZeroPad(`0x${v.toString(16)}`, 32));
       return acc;
     }, new Map<number, string>());
@@ -95,7 +109,7 @@ export default async function main() {
   const verified = await verifyProof(api, acirBuffer, proof);
   console.log('Verified:', verified);
 
-  const publicInputs = proof.slice(0, 32);
-  const slicedProof = proof.slice(32);
+  const publicInputs = proof.slice(0, 32 * 3);
+  const slicedProof = proof.slice(32 * 3);
   return { proof: slicedProof, publicInputs };
 }

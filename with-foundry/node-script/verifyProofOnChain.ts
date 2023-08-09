@@ -30,7 +30,13 @@ export const verifyProofOnChain = async ({ verifierContract }: { verifierContrac
   const { proof, publicInputs } = await generateSolidityInputs();
   console.log('publicInputs', publicInputs.length);
   const contract = new ethers.Contract(verifierContract, verifierABI.abi, wallet);
-  const result = await contract.connect(wallet).verifyEqual(proof, [publicInputs]);
+  const result = await contract
+    .connect(wallet)
+    .verifyEqual(proof, [
+      publicInputs.slice(0, 32),
+      publicInputs.slice(32, 64),
+      publicInputs.slice(64, 96),
+    ]);
   console.log('result', result);
   return true;
 };
