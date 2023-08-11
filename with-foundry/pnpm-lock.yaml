@@ -6,11 +6,11 @@ settings:
 
 dependencies:
   '@aztec/bb.js':
-    specifier: ^0.3.4
-    version: 0.3.4
+    specifier: ^0.3.6
+    version: 0.3.6
   '@noir-lang/acvm_js':
-    specifier: github:noir-lang/acvm-simulator-wasm#c56eec56f67f90fef90126c5575b85190bdcd1e1
-    version: github.com/noir-lang/acvm-simulator-wasm/c56eec56f67f90fef90126c5575b85190bdcd1e1
+    specifier: git+https://github.com/noir-lang/acvm-simulator-wasm.git
+    version: github.com/noir-lang/acvm-simulator-wasm/b9d9ca9dfc5140839f23998d9466307215607c42
   '@noir-lang/noir_wasm':
     specifier: github:noir-lang/noir_wasm
     version: github.com/noir-lang/noir_wasm/be1ada9a86b1042b2058b929f8b04ea643c047c6(@noir-lang/noir-source-resolver@1.1.2)
@@ -43,8 +43,8 @@ devDependencies:
 
 packages:
 
-  /@aztec/bb.js@0.3.4:
-    resolution: {integrity: sha512-h6Od6UrtHa4Bz8QqCzHGn1VYco1P6K12yaFWDeF8PKFvuJwilVlBEffMWGGNUlaTeZtx46QYoXxUMZ2862/m4g==}
+  /@aztec/bb.js@0.3.6:
+    resolution: {integrity: sha512-7s/SZ3k5R1wfnVoU6sz9BBxBaI7ubkXPnvsI2KsJso2J2pwbXGxJsfOzn+uol+v3ZPooIa84/+SHk3UaPbMJGw==}
     hasBin: true
     dependencies:
       comlink: 4.4.1
@@ -750,10 +750,10 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  github.com/noir-lang/acvm-simulator-wasm/c56eec56f67f90fef90126c5575b85190bdcd1e1:
-    resolution: {commit: c56eec56f67f90fef90126c5575b85190bdcd1e1, repo: git+ssh://git@github.com/noir-lang/acvm-simulator-wasm.git, type: git}
+  github.com/noir-lang/acvm-simulator-wasm/b9d9ca9dfc5140839f23998d9466307215607c42:
+    resolution: {commit: b9d9ca9dfc5140839f23998d9466307215607c42, repo: git+ssh://git@github.com/noir-lang/acvm-simulator-wasm.git, type: git}
     name: '@noir-lang/acvm_js'
-    version: 0.0.0-3cc4575
+    version: 0.0.0-d576736
     dev: false
 
   github.com/noir-lang/noir_wasm/be1ada9a86b1042b2058b929f8b04ea643c047c6(@noir-lang/noir-source-resolver@1.1.2):

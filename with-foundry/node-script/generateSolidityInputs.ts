@@ -31,7 +31,6 @@ async function generateWitness(
 
 async function generateProof(api: BarretenbergApiAsync, acirBuffer: Buffer, witness: Uint8Array) {
   const acirBufferUncompressed = decompressSync(acirBuffer);
-
   const [, total] = await api.acirGetCircuitSizes(acirBufferUncompressed);
   const subgroupSize = Math.pow(2, Math.ceil(Math.log2(total)));
   const crs = await Crs.new(subgroupSize + 1);

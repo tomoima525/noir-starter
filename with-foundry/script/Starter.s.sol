@@ -1,8 +1,8 @@
 pragma solidity ^0.8.17;
 
-import "forge-std/Script.sol";
-import "../circuits/contract/plonk_vk.sol";
-import "../contract/Starter.sol";
+import 'forge-std/Script.sol';
+import '../circuits/contract/main/plonk_vk.sol';
+import '../contract/Starter.sol';
 
 contract StarterScript is Script {
     Starter public starter;
@@ -11,7 +11,7 @@ contract StarterScript is Script {
     function setUp() public {}
 
     function run() public {
-        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+        uint256 deployerPrivateKey = vm.envUint('PRIVATE_KEY');
         vm.startBroadcast(deployerPrivateKey);
 
         verifier = new UltraVerifier();

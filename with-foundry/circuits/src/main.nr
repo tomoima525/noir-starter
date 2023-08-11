@@ -1,6 +1,5 @@
 use dep::std;
 use dep::noir_merkleroot;
-
 fn main(
     commits: pub [Field; 3], // commitments, in the order of name, age, countrycode
     age: pub Field,
@@ -18,9 +17,10 @@ fn main(
     
     // Age confirmation
     assert(age as u32 <= values[1] as u32);
-
+    let indices: [Field] = path_indices; 
+    let sibs: [Field] = siblings;
     // CountryCode eligibility check
-    let new_root = noir_merkleroot::compute_merkle_root(leaf, path_indices, siblings);
+    let new_root = noir_merkleroot::compute_merkle_root(leaf, indices, sibs);
     assert(new_root == root);
 }
 
