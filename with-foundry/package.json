@@ -17,9 +17,8 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
-    "@aztec/bb.js": "^0.3.6",
-    "@noir-lang/acvm_js": "git+https://github.com/noir-lang/acvm-simulator-wasm.git",
-    "@noir-lang/noir_wasm": "github:noir-lang/noir_wasm",
+    "@aztec/bb.js": "0.5.1",
+    "@noir-lang/acvm_js": "git+https://github.com/noir-lang/acvm-simulator-wasm.git#b9d9ca9dfc5140839f23998d9466307215607c42",
     "circomlibjs": "^0.1.7",
     "dotenv": "^16.0.1",
     "ethers": "^5.6.9",

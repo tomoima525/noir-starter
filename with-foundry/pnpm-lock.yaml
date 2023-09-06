@@ -6,14 +6,11 @@ settings:
 
 dependencies:
   '@aztec/bb.js':
-    specifier: ^0.3.6
-    version: 0.3.6
+    specifier: 0.5.1
+    version: 0.5.1
   '@noir-lang/acvm_js':
-    specifier: git+https://github.com/noir-lang/acvm-simulator-wasm.git
-    version: github.com/noir-lang/acvm-simulator-wasm/b9d9ca9dfc5140839f23998d9466307215607c42
-  '@noir-lang/noir_wasm':
-    specifier: github:noir-lang/noir_wasm
-    version: github.com/noir-lang/noir_wasm/be1ada9a86b1042b2058b929f8b04ea643c047c6(@noir-lang/noir-source-resolver@1.1.2)
+    specifier: git+https://github.com/noir-lang/acvm-simulator-wasm.git#b9d9ca9dfc5140839f23998d9466307215607c42
+    version: git@github.com+noir-lang/acvm-simulator-wasm/b9d9ca9dfc5140839f23998d9466307215607c42
   circomlibjs:
     specifier: ^0.1.7
     version: 0.1.7
@@ -43,14 +40,14 @@ devDependencies:
 
 packages:
 
-  /@aztec/bb.js@0.3.6:
-    resolution: {integrity: sha512-7s/SZ3k5R1wfnVoU6sz9BBxBaI7ubkXPnvsI2KsJso2J2pwbXGxJsfOzn+uol+v3ZPooIa84/+SHk3UaPbMJGw==}
+  /@aztec/bb.js@0.5.1:
+    resolution: {integrity: sha512-6464VrHgztws/rejJG0b3RUbycQ6subNoYODtuz7yDSZ9/s32ikjYOYADcAqSdK3QsohCifIvmkyis+KOpyJYQ==}
     hasBin: true
     dependencies:
       comlink: 4.4.1
       commander: 10.0.1
       debug: 4.3.4
-      idb-keyval: 6.2.1
+      tslib: 2.6.2
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -392,10 +389,6 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
-  /@noir-lang/noir-source-resolver@1.1.2:
-    resolution: {integrity: sha512-GRiAR7z2RxdUt07fL3X303sm3Qs4Ec9lPDCQ5uwK7xDD2nK6KaNBNQyl+JrotCxsMhoh7MVh38SZSOOCxaJgUQ==}
-    dev: false
-
   /@tsconfig/node10@1.0.9:
     resolution: {integrity: sha512-jNsYVVxU8v5g43Erja32laIDHXeoNvFEpX33OK4d6hljo3jDhCBDhx5dhCCTMWUojscpAagGiRkBKxpdl9fxqA==}
     dev: true
@@ -603,10 +596,6 @@ packages:
       minimalistic-crypto-utils: 1.0.1
     dev: false
 
-  /idb-keyval@6.2.1:
-    resolution: {integrity: sha512-8Sb3veuYCyrZL+VBt9LJfZjLUPWVvqn8tG28VqYNFCo43KHcKuq+b4EiXGeuaLAQWL2YmyDgMp2aSpH9JHsEQg==}
-    dev: false
-
   /inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
     dev: false
@@ -704,6 +693,10 @@ packages:
       yn: 3.1.1
     dev: true
 
+  /tslib@2.6.2:
+    resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
+    dev: false
+
   /typescript@5.1.6:
     resolution: {integrity: sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA==}
     engines: {node: '>=14.17'}
@@ -750,19 +743,8 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  github.com/noir-lang/acvm-simulator-wasm/b9d9ca9dfc5140839f23998d9466307215607c42:
-    resolution: {commit: b9d9ca9dfc5140839f23998d9466307215607c42, repo: git+ssh://git@github.com/noir-lang/acvm-simulator-wasm.git, type: git}
+  git@github.com+noir-lang/acvm-simulator-wasm/b9d9ca9dfc5140839f23998d9466307215607c42:
+    resolution: {commit: b9d9ca9dfc5140839f23998d9466307215607c42, repo: git@github.com:noir-lang/acvm-simulator-wasm.git, type: git}
     name: '@noir-lang/acvm_js'
     version: 0.0.0-d576736
-    dev: false
-
-  github.com/noir-lang/noir_wasm/be1ada9a86b1042b2058b929f8b04ea643c047c6(@noir-lang/noir-source-resolver@1.1.2):
-    resolution: {tarball: https://codeload.github.com/noir-lang/noir_wasm/tar.gz/be1ada9a86b1042b2058b929f8b04ea643c047c6}
-    id: github.com/noir-lang/noir_wasm/be1ada9a86b1042b2058b929f8b04ea643c047c6
-    name: '@noir-lang/noir_wasm'
-    version: 0.9.1-0164a92.0
-    peerDependencies:
-      '@noir-lang/noir-source-resolver': 1.1.2
-    dependencies:
-      '@noir-lang/noir-source-resolver': 1.1.2
     dev: false

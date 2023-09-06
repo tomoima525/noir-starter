@@ -2,12 +2,8 @@ import { utils } from 'ethers';
 import fs from 'fs';
 import path from 'path';
 import { buildPoseidon } from 'circomlibjs';
-import {
-  BarretenbergApiAsync,
-  Crs,
-  newBarretenbergApiAsync,
-  RawBuffer,
-} from '@aztec/bb.js/dest/node/index.js';
+// @ts-ignore
+import { Barretenberg, Crs, RawBuffer } from '@aztec/bb.js';
 import { decompressSync } from 'fflate';
 import { executeCircuit, compressWitness } from '@noir-lang/acvm_js';
 import { encodeStringToBigInt } from './encodeStringToBigInt.js';
@@ -29,7 +25,7 @@ async function generateWitness(
   return witnessBuff;
 }
 
-async function generateProof(api: BarretenbergApiAsync, acirBuffer: Buffer, witness: Uint8Array) {
+async function generateProof(api: Barretenberg, acirBuffer: Buffer, witness: Uint8Array) {
   const acirBufferUncompressed = decompressSync(acirBuffer);
   const [, total] = await api.acirGetCircuitSizes(acirBufferUncompressed);
   const subgroupSize = Math.pow(2, Math.ceil(Math.log2(total)));
@@ -51,7 +47,7 @@ async function generateProof(api: BarretenbergApiAsync, acirBuffer: Buffer, witn
   return proof;
 }
 
-async function verifyProof(api: BarretenbergApiAsync, acirBuffer: Buffer, proof: Uint8Array) {
+async function verifyProof(api: Barretenberg, acirBuffer: Buffer, proof: Uint8Array) {
   const acirBufferUncompressed = decompressSync(acirBuffer);
 
   const [, total] = await api.acirGetCircuitSizes(acirBufferUncompressed);
@@ -74,7 +70,7 @@ async function verifyProof(api: BarretenbergApiAsync, acirBuffer: Buffer, proof:
 export default async function main() {
   console.log('Instantiating...');
 
-  const api = await newBarretenbergApiAsync(4);
+  const api = await Barretenberg.new(4);
   const acirBuffer = Buffer.from(circuit.bytecode, 'base64');
 
   console.log('Generating inputs...');
@@ -124,5 +120,6 @@ export default async function main() {
 
   const publicInputs = proof.slice(0, 32 * 4);
   const slicedProof = proof.slice(32 * 4);
+
   return { proof: slicedProof, publicInputs };
 }
