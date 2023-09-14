@@ -1,6 +1,7 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 
-import "../circuits/contract/plonk_vk.sol";
+import '../circuits/contract/main/plonk_vk.sol';
 
 contract Starter {
     UltraVerifier public verifier;
@@ -11,7 +12,7 @@ contract Starter {
 
     function verifyEqual(bytes calldata proof, bytes32[] calldata y) public view returns (bool) {
         bool proofResult = verifier.verify(proof, y);
-        require(proofResult, "Proof is not valid");
+        require(proofResult, 'Proof is not valid');
         return proofResult;
     }
 }
